@@ -9,7 +9,15 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        [
+          "expo-image-picker",
+          {
+            "cameraPermission": "The app needs access to your camera in order to take photos of your favorite places."
+          }
+        ]
+      ]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
