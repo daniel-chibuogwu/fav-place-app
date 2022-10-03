@@ -2,9 +2,13 @@ import { Pressable, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/colors";
 
-function OutlinedButton({ onPress, icon, children }) {
+function OutlinedButton({ onPress, icon, children, disabled }) {
+  if (disabled) {
+    return;
+  }
   return (
     <Pressable
+      disabled={disabled}
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
