@@ -35,16 +35,18 @@ function LocationPicker({ onLocationTaken }) {
   }, [route, isFocused]);
 
   useEffect(() => {
-    async function handleLocation() {
-      if (pickedLocation) {
-        const address = await getAddress(
-          pickedLocation.lat,
-          pickedLocation.lng
-        );
-        onLocationTaken({ ...pickedLocation, address: address });
-      }
-    }
-    handleLocation();
+    // async function handleLocation() {
+    //   if (pickedLocation) {
+    //     const address = await getAddress(
+    //       pickedLocation.lat,
+    //       pickedLocation.lng
+    //     );
+    //     onLocationTaken({ ...pickedLocation, address: address });
+    onLocationTaken({ ...pickedLocation });
+
+    //   }
+    // }
+    // handleLocation();
   }, [pickedLocation, onLocationTaken]);
 
   async function verifyPermissions() {
