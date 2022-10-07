@@ -1,18 +1,19 @@
-const GOOGLE_API_KEY = "AIzaSyBeKyPVXlRuCMitucuzAWKRLgupeOePJ6E";
+import axios from "axios";
+
+const LocationIQ_ACCESS_TOKEN = "pk.d51fcb9d23346abffced08d9f65dd6d4";
 
 export function getMapPreview({ lat, lng }) {
-  return `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=400x200&maptype=roadmap
-&markers=color:red%7Clabel:S%7C${lat},${lng}&key=${GOOGLE_API_KEY}`;
+  return `https://maps.locationiq.com/v3/staticmap?key=${LocationIQ_ACCESS_TOKEN}&markers=icon:large-red-cutout|${lat},${lng}&zoom=14`;
 }
 
 export async function getAddress(lat, lng) {
-  //couldn't complete this because I didn't have the  billings access for google
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch address");
+  //This returns the human readable addresses;
+  try {
+    const response = await axios.get(
+      `https://us1.locationiq.com/v1/reverse?key=${LocationIQ_ACCESS_TOKEN}&lat=${lat}&lon=${lng}&format=json`
+    );
+    return response.data.display_name;
+  } catch (e) {
+    console.log(e, "There was an error");
   }
-  const data = await response.json();
-  const address = data.results.at(0).formatted_address;
-  return address;
 }
